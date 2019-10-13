@@ -4,15 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "stock_user")
+@NamedQuery(query = "SELECT su FROM StockUser su WHERE su.user.id = :userId", name = "getStocksByUser")
+@NamedQuery(query = "SELECT su FROM StockUser su WHERE su.user.id = :userId AND su.stock.id = :stockId", name = "getStockByUserAndId")
 public class StockUser {
 
     @Id
     @GeneratedValue
     int id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_stock")
     private Stock stock;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
 

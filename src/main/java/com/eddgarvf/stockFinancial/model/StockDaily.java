@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "stocks_daily")
+@Table(name = "stock_daily")
 public class StockDaily {
 
     @Id
     @GeneratedValue
     int id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock_id")
+    @JoinColumn(name = "id_stock")
     private Stock stock;
     private Date date;
     private double priceOpen;
