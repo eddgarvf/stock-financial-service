@@ -1,24 +1,24 @@
-package com.eddgarvf.stockFinancial.model;
+package com.eddgarvf.stockFinancial.controller.model;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "stock_daily")
-@NamedQuery(query = "SELECT sd FROM StockDaily sd WHERE sd.stock.id = :stockId AND sd.date BETWEEN :startDate AND :endDate", name = "getStockDailyRecorrsByDate")
-public class StockDaily {
+public class StockDailyByDate {
 
-    @Id
-    @GeneratedValue
     int id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_stock")
-    private Stock stock;
     private Date date;
     private double priceOpen;
     private double priceClose;
     private double priceChange;
     private int volume;
+
+    public StockDailyByDate(int id, Date date, double priceOpen, double priceClose, double priceChange, int volume) {
+        this.id = id;
+        this.date = date;
+        this.priceOpen = priceOpen;
+        this.priceClose = priceClose;
+        this.priceChange = priceChange;
+        this.volume = volume;
+    }
 
     public int getId() {
         return id;
@@ -26,14 +26,6 @@ public class StockDaily {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
     }
 
     public Date getDate() {

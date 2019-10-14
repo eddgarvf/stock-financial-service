@@ -17,6 +17,8 @@ public class StockUser {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
+    @Column(name = "stock_qty")
+    int stockQty;
 
     public int getId() {
         return id;
@@ -40,5 +42,13 @@ public class StockUser {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getStockQty() {
+        return stockQty;
+    }
+
+    public void setStockQty(int stockQty) {
+        this.stockQty = stockQty;
     }
 }

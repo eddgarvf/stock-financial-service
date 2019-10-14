@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StockService {
@@ -31,8 +30,15 @@ public class StockService {
         return stockDao.getStockById(stockId);
     }
 
-    public List<Stock> getStocksByUserId(int userId) {
-        return stockDao.getStocksByUser(userId).stream().map(stockUser -> stockUser.getStock()).collect(Collectors.toList());
+    public List<StockUser> getStocksByUserId(int userId) {
+        return stockDao.getStocksByUser(userId);
+    }
+
+    public StockUser getStockByUserAndStock(int userId, int stockId){
+        StockUser stockUser = new StockUser();
+        stockUser.setUser(userDao.getUserById(userId));
+        stockUser.setStock(stockDao.getStockById(stockId));
+        return stockDao.getStockByUserAndStock(stockUser);
     }
 
     public void addStock(Stock stock) {

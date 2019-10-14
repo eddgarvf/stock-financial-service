@@ -2,10 +2,10 @@ package com.eddgarvf.stockFinancial.dao;
 
 import com.eddgarvf.stockFinancial.model.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
@@ -15,11 +15,13 @@ public class UserDaoImpl implements UserDao{
     private EntityManager entityManager;
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User ORDER BY id").getResultList();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(int userId) {
         return entityManager.find(User.class, userId);
     }

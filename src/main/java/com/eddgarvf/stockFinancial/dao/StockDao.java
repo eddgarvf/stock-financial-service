@@ -9,6 +9,7 @@ public interface StockDao {
 
     List<Stock> getAllStocks();
     List<StockUser> getStocksByUser(int userId);
+    StockUser getStockByUserAndStock(StockUser stockUser);
     Stock getStockById(int stockId);
     void addStock(Stock stock);
     void buyStock(StockUser stockUser);

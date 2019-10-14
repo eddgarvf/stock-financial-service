@@ -5,6 +5,8 @@ import com.eddgarvf.stockFinancial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,13 +23,21 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = "/get/all")
     public List<User> getAllUsers(){
-        return userService.getAllUsers();
+        try{
+            return userService.getAllUsers();
+        }catch (Exception e){
+            return new ArrayList<>();
+        }
     }
 
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = "/get/{userId}")
     public User getUserById(@PathVariable(name = "userId") int userId){
-        return userService.getUserById(userId);
+        try {
+            return userService.getUserById(userId);
+        }catch(Exception e){
+            return new User();
+        }
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
