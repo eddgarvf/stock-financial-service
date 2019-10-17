@@ -36,11 +36,11 @@ public class User {
         this.email = email;
     }
 
-//    public Set<StockUser> getStockUserRecords() {
+//    public Set<Share> getStockUserRecords() {
 //        return stockUserRecords;
 //    }
 //
-//    public void setStockUserRecords(Set<StockUser> stockUserRecords) {
+//    public void setStockUserRecords(Set<Share> stockUserRecords) {
 //        this.stockUserRecords = stockUserRecords;
 //    }
 }

@@ -23,30 +23,32 @@ public class StockDailyService {
         this.stockDao = stockDao;
     }
 
-
-    public StockDaily getStockDailyRecord(int stockDailyId){
-        return stockDailyDao.getStockDailyRecord(stockDailyId);
+    public StockDaily get(int stockDailyId){
+        return stockDailyDao.get(stockDailyId);
     }
 
-    public List<StockDaily> getStocksDailyRecordsByDate(int stockId, Date startDate, Date endDate) {
-        return stockDailyDao.getStocksDailyRecordsByDate(stockId, startDate, endDate);
+    public StockDaily getLastStockDailyRecord(int stockId){
+        return stockDailyDao.getLastStockDailyRecord(stockId);
+    }
+
+    public List<StockDaily> getListByDates(int stockId, Date startDate, Date endDate) {
+        return stockDailyDao.getListByDates(stockId, startDate, endDate);
     }
 
 
-    public void addStockDailyRecord(StockDailyRecordRequest request) {
+    public void add(StockDailyRecordRequest request) {
         StockDaily stockDaily = new StockDaily();
-        stockDaily.setDate(request.getDate());
         stockDaily.setPriceChange(request.getPriceChange());
         stockDaily.setPriceClose(request.getPriceClose());
         stockDaily.setPriceOpen(request.getPriceOpen());
         stockDaily.setVolume(request.getVolume());
-        stockDaily.setStock(stockDao.getStockById(request.getStockId()));
-        stockDailyDao.addStockDailyRecord(stockDaily);
+        stockDaily.setStock(stockDao.getById(request.getStockId()));
+        stockDailyDao.add(stockDaily);
     }
 
 
-    public void updateStockDailyRecord(StockDaily stockDaily) {
-        stockDailyDao.updateStockDailyRecord(stockDaily);
+    public void update(StockDaily stockDaily) {
+        stockDailyDao.update(stockDaily);
     }
 
 }

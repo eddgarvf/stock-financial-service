@@ -1,11 +1,8 @@
 package com.eddgarvf.stockFinancial.controller.model;
 
-import java.util.Date;
-
 public class StockDailyRecordRequest {
 
     private int stockId;
-    private Date date;
     private double priceOpen;
     private double priceClose;
     private double priceChange;
@@ -17,14 +14,6 @@ public class StockDailyRecordRequest {
 
     public void setStockId(int stockId) {
         this.stockId = stockId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public double getPriceOpen() {

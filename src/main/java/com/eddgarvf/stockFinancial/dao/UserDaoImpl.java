@@ -11,33 +11,34 @@ import java.util.List;
 @Transactional
 @Repository
 public class UserDaoImpl implements UserDao{
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> getAllUsers() {
+    public List<User> getAll() {
         return entityManager.createQuery("FROM User ORDER BY id").getResultList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserById(int userId) {
+    public User getById(int userId) {
         return entityManager.find(User.class, userId);
     }
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void update(User user) {
         entityManager.merge(user);
     }
 
     @Override
-    public void deleteUser(int userId) {
-        entityManager.remove(getUserById(userId));
+    public void delete(int userId) {
+        entityManager.remove(getById(userId));
     }
 }

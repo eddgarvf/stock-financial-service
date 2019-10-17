@@ -38,10 +38,10 @@ public class UserServiceTest {
         user2.setEmail("albert@lol.com");
         usersList.add(user1);
         usersList.add(user2);
-        when(userDao.getAllUsers()).thenReturn(usersList);
-        userService.getAllUsers();
+        when(userDao.getAll()).thenReturn(usersList);
+        userService.getAll();
 
-        verify(userDao, times(1)).getAllUsers();
+        verify(userDao, times(1)).getAll();
     }
 
 

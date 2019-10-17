@@ -3,10 +3,9 @@ package com.eddgarvf.stockFinancial.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "stock_user")
-@NamedQuery(query = "SELECT su FROM StockUser su WHERE su.user.id = :userId", name = "getStocksByUser")
-@NamedQuery(query = "SELECT su FROM StockUser su WHERE su.user.id = :userId AND su.stock.id = :stockId", name = "getStockByUserAndId")
-public class StockUser {
+@Table(name = "share_qty")
+@NamedQuery(query = "SELECT sq FROM ShareQty sq WHERE sq.user.id = :userId AND sq.stock.id = :stockId", name = "getShareQty")
+public class ShareQty {
 
     @Id
     @GeneratedValue
@@ -17,8 +16,7 @@ public class StockUser {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
-    @Column(name = "stock_qty")
-    int stockQty;
+    int shares;
 
     public int getId() {
         return id;
@@ -44,11 +42,11 @@ public class StockUser {
         this.user = user;
     }
 
-    public int getStockQty() {
-        return stockQty;
+    public int getShares() {
+        return shares;
     }
 
-    public void setStockQty(int stockQty) {
-        this.stockQty = stockQty;
+    public void setShares(int shares) {
+        this.shares = shares;
     }
 }

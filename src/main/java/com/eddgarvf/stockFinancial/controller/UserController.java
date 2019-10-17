@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping(path = "/get/all")
     public List<User> getAllUsers(){
         try{
-            return userService.getAllUsers();
+            return userService.getAll();
         }catch (Exception e){
             return new ArrayList<>();
         }
@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping(path = "/get/{userId}")
     public User getUserById(@PathVariable(name = "userId") int userId){
         try {
-            return userService.getUserById(userId);
+            return userService.getById(userId);
         }catch(Exception e){
             return new User();
         }
@@ -43,19 +43,19 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = "/add")
     public void addUser(@RequestBody User user){
-        userService.addUser(user);
+        userService.add(user);
     }
 
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping(path = "/update")
     public void updateUser(@RequestBody User user){
-        userService.updateUser(user);
+        userService.update(user);
     }
 
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = "/delete/{userId}")
     public void deleteUser(@PathVariable(name = "userId") int userId){
-        userService.deleteUser(userId);
+        userService.delete(userId);
     }
 
 }

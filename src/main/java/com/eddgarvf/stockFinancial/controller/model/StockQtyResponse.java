@@ -5,15 +5,17 @@ public class StockQtyResponse {
     private int id;
     private String name;
     private String code;
-    private int quantity;
+    private int shares;
+    private double amount;
 
     public StockQtyResponse(){}
 
-    public StockQtyResponse(int id, String name, String code, int quantity) {
+    public StockQtyResponse(int id, String name, String code, int shares, double amount) {
         this.id = id;
         this.name = name;
         this.code = code;
-        this.quantity = quantity;
+        this.shares = shares;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -40,11 +42,19 @@ public class StockQtyResponse {
         this.code = code;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getShares() {
+        return shares;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setShares(int shares) {
+        this.shares = shares;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

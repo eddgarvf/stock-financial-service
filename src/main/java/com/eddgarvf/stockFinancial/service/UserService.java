@@ -17,24 +17,24 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<User> getAll() {
+        return userDao.getAll();
     }
 
-    public User getUserById(int userId) {
-        return userDao.getUserById(userId);
+    public User getById(int userId) {
+        return userDao.getById(userId);
     }
 
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public void add(User user) {
+        userDao.add(user);
     }
 
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public void update(User user) {
+        userDao.update(user);
     }
 
-    public void deleteUser(int userId) {
-        userDao.deleteUser(userId);
+    public void delete(int userId) {
+        userDao.delete(userId);
     }
 
 }

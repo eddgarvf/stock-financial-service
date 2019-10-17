@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +32,10 @@ public class StockDailyController {
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = "/get/{stockId}/{startDate}/{endDate}")
     public StockDailyByDateResponse getStocksDailyRecordsByDate(@PathVariable(name = "stockId") int stockId,
-                                                                      @PathVariable(name = "startDate") @DateTimeFormat(pattern=DATE_FORMAT) String startDate,
-                                                                      @PathVariable(name = "endDate")  @DateTimeFormat(pattern=DATE_FORMAT) String endDate){
+                                                                      @PathVariable(name = "startDate") @DateTimeFormat(pattern = DATE_FORMAT) String startDate,
+                                                                      @PathVariable(name = "endDate")   @DateTimeFormat(pattern = DATE_FORMAT) String endDate){
         try {
-            List<StockDaily> stockDailyList = stockDailyService.getStocksDailyRecordsByDate(
+            List<StockDaily> stockDailyList = stockDailyService.getListByDates(
                     stockId,
                     new SimpleDateFormat(DATE_FORMAT).parse(startDate),
                     new SimpleDateFormat(DATE_FORMAT).parse(endDate));
@@ -43,7 +44,7 @@ public class StockDailyController {
                     stockDailyList.stream().map(stockDaily ->
                             new StockDailyByDate(
                                 stockDaily.getId(),
-                                stockDaily.getDate(),
+                                stockDaily.getDatetime(),
                                 stockDaily.getPriceOpen(),
                                 stockDaily.getPriceClose(),
                                 stockDaily.getPriceChange(),
@@ -57,10 +58,11 @@ public class StockDailyController {
     }
 
     @ResponseStatus(value = HttpStatus.OK)
-    @GetMapping(path = "/get/{stockDailyId}")
-    public StockDaily getStockDailyRecord(@PathVariable(name = "stockDailyId") int stockDailyId){
+    @GetMapping(path = "/get-last/{stockId}")
+    public StockDaily getStockDailyRecordByDate(
+            @PathVariable(name = "stockId") int stockId){
         try {
-            return stockDailyService.getStockDailyRecord(stockDailyId);
+            return stockDailyService.getLastStockDailyRecord(stockId);
         }catch (Exception e){
             return new StockDaily();
         }
@@ -69,13 +71,7 @@ public class StockDailyController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = "/add")
     public void addStock(@RequestBody StockDailyRecordRequest request){
-        stockDailyService.addStockDailyRecord(request);
-    }
-
-    @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping(path = "/update")
-    public void updateStockDailyRecord(@RequestBody StockDaily stockDaily){
-        stockDailyService.updateStockDailyRecord(stockDaily);
+        stockDailyService.add(request);
     }
 
 }

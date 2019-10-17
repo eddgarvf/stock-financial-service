@@ -1,19 +1,14 @@
 package com.eddgarvf.stockFinancial.dao;
 
 import com.eddgarvf.stockFinancial.model.Stock;
-import com.eddgarvf.stockFinancial.model.StockUser;
 
 import java.util.List;
 
 public interface StockDao {
 
-    List<Stock> getAllStocks();
-    List<StockUser> getStocksByUser(int userId);
-    StockUser getStockByUserAndStock(StockUser stockUser);
-    Stock getStockById(int stockId);
-    void addStock(Stock stock);
-    void buyStock(StockUser stockUser);
-    void removeBoughtStock(StockUser stockUser);
-    void updateStock(Stock stock);
-    void deleteStock(int stockId);
+    List<Stock> getAll();
+    Stock getById(int stockId);
+    void add(Stock stock);
+    void update(Stock stock);
+    void delete(int stockId);
 }

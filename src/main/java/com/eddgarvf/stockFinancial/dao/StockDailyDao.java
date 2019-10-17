@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface StockDailyDao {
 
-    StockDaily getStockDailyRecord(int stockDailyId);
-    List<StockDaily> getStocksDailyRecordsByDate(int stockId, Date startDate, Date endDate);
-    void addStockDailyRecord(StockDaily stockDaily);
-    void updateStockDailyRecord(StockDaily stockDaily);
+    StockDaily get(int stockDailyId);
+    StockDaily getLastStockDailyRecord(int stockId);
+    List<StockDaily> getListByDates(int stockId, Date startDate, Date endDate);
+    void add(StockDaily stockDaily);
+    void update(StockDaily stockDaily);
 }

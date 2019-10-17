@@ -1,11 +1,16 @@
 package com.eddgarvf.stockFinancial.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "stock_daily")
-@NamedQuery(query = "SELECT sd FROM StockDaily sd WHERE sd.stock.id = :stockId AND sd.date BETWEEN :startDate AND :endDate", name = "getStockDailyRecorrsByDate")
+@NamedQuery(query = "SELECT sd FROM StockDaily sd WHERE sd.stock.id = :stockId AND sd.datetime BETWEEN :startDate AND :endDate ORDER BY sd.datetime DESC", name = "getStockDailyRecordsByDate")
+@NamedQuery(query = "SELECT sd FROM StockDaily sd WHERE sd.stock.id = :stockId ORDER BY sd.datetime DESC", name = "getLastStockDailyRecord")
 public class StockDaily {
 
     @Id
@@ -14,11 +19,16 @@ public class StockDaily {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_stock")
     private Stock stock;
-    private Date date;
+    private Date datetime;
     private double priceOpen;
     private double priceClose;
     private double priceChange;
     private int volume;
+
+    @PrePersist
+    protected void onCreate() {
+        this.datetime = new Date();
+    }
 
     public int getId() {
         return id;
@@ -36,12 +46,12 @@ public class StockDaily {
         this.stock = stock;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
     public double getPriceOpen() {
