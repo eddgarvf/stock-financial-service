@@ -2,13 +2,13 @@ package com.eddgarvf.stockFinancial.service;
 
 import com.eddgarvf.stockFinancial.dao.*;
 import com.eddgarvf.stockFinancial.model.*;
+import com.eddgarvf.stockFinancial.util.ServiceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,20 +18,20 @@ public class ShareService {
 
     private static final Logger logger = LoggerFactory.getLogger(ShareService.class);
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
     private final StockDailyDao stockDailyDao;
     private final ShareDao shareDao;
     private final ShareQtyDao shareQtyDao;
+    private final ServiceUtil serviceUtil;
 
     @Autowired
     public ShareService(StockDailyDao stockDailyDao,
                         ShareDao shareDao,
-                        ShareQtyDao shareQtyDao){
+                        ShareQtyDao shareQtyDao,
+                        ServiceUtil serviceUtil){
         this.stockDailyDao = stockDailyDao;
         this.shareDao = shareDao;
         this.shareQtyDao = shareQtyDao;
+        this.serviceUtil = serviceUtil;
     }
 
     public List<Share> getAllByUser(int userId) {
@@ -63,7 +63,7 @@ public class ShareService {
 
     public List<Share> getAllBoughtByUserStockDates(int userId, int stockId, Date startDate, Date endDate) {
         try{
-            return shareDao.getAllBoughtByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+            return shareDao.getAllBoughtByUserStockDates(userId, stockId, startDate, serviceUtil.getDateWithMidNight(endDate));
         }catch (Exception e){
             logger.error(e.getMessage());
             return new ArrayList<>();
@@ -90,7 +90,7 @@ public class ShareService {
 
     public List<Share> getAllSoldByUserStockDates(int userId, int stockId, Date startDate, Date endDate) {
         try{
-            return shareDao.getAllSoldByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+            return shareDao.getAllSoldByUserStockDates(userId, stockId, startDate, serviceUtil.getDateWithMidNight(endDate));
         }catch (Exception e){
             logger.error(e.getMessage());
             return new ArrayList<>();
@@ -151,7 +151,7 @@ public class ShareService {
     public double getGainLossPerDate(int userId, int stockId, Date startDate, Date endDate){
         double totalPurchasePrice = 0;
         double totalSellPrice = 0;
-        List<Share> soldShares = getAllSoldByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+        List<Share> soldShares = getAllSoldByUserStockDates(userId, stockId, startDate, serviceUtil.getDateWithMidNight(endDate));
 
         for(Share share : soldShares){
             totalPurchasePrice += share.getBuyPrice();
@@ -170,17 +170,5 @@ public class ShareService {
             share.setUser(user);
             shareDao.add(share);
         }
-    }
-
-    private Date getDateWithMidNight(Date date) {
-        try {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
-            String strDate = dateFormatter.format(date) + " 23:59:59";
-            SimpleDateFormat dateTimeFormatter = new SimpleDateFormat(DATETIME_FORMAT);
-            date = dateTimeFormatter.parse(strDate);
-        }catch (ParseException e){
-            logger.error(e.getMessage());
-        }
-        return date;
     }
 }
