@@ -112,6 +112,18 @@ public class ShareService {
         }
     }
 
+    public double getGainLossPerDate(int userId, int stockId, Date startDate, Date endDate){
+        double totalPurchasePrice = 0;
+        double totalSellPrice = 0;
+        List<Share> soldShares = getAllSoldByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+
+        for(Share share : soldShares){
+            totalPurchasePrice += share.getBuyPrice();
+            totalSellPrice += share.getSellPrice();
+        }
+        return totalSellPrice - totalPurchasePrice;
+    }
+
     private void saveSharesBought(int shares, double price, Stock stock, User user) {
 
         for(int i = 0; i < shares; i++){

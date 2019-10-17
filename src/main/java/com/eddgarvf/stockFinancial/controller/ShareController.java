@@ -77,6 +77,17 @@ public class ShareController {
             @PathVariable(name = "endDate")   @DateTimeFormat(pattern = DATE_FORMAT) Date endDate) {
         return shareService.getAllSoldByUserStockDates(userId, stockId, startDate, endDate);
     }
+
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping( path = "/get/gain-loss/{userId}/{stockId}/{startDate}/{endDate}")
+    public Double getGainLossByUserStockDates(
+            @PathVariable(name = "userId") int userId,
+            @PathVariable(name = "stockId") int stockId,
+            @PathVariable(name = "startDate") @DateTimeFormat(pattern = DATE_FORMAT) Date startDate,
+            @PathVariable(name = "endDate")   @DateTimeFormat(pattern = DATE_FORMAT) Date endDate) {
+        return shareService.getGainLossPerDate(userId, stockId, startDate, endDate);
+    }
+
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = "/buy/{userId}/{stockId}/{shares}")
     public void buyShares(

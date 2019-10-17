@@ -31,7 +31,7 @@ public class StockDailyDaoImpl implements StockDailyDao {
 
     @Override
     public List<StockDaily> getListByDates(int stockId, Date startDate, Date endDate) {
-        Query query = entityManager.createNamedQuery("getStockDailyRecordsByDates");
+        Query query = entityManager.createNamedQuery("getStockDailyRecordsByDate");
         query.setParameter("stockId", stockId);
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
