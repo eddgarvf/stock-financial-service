@@ -120,7 +120,7 @@ public class NotificationService {
         notificationDao.update(notification);
     }
 
-    public void delete(int notification) {
+    public void delete(Notification notification) {
         notificationDao.delete(notification);
     }
 

@@ -98,8 +98,8 @@ public class NotificationController {
     }
 
     @ResponseStatus(value = HttpStatus.OK)
-    @DeleteMapping(path = "/delete/{notificationId}")
-    public void delete(@PathVariable(name = "notificationId")  int notification) {
+    @DeleteMapping(path = "/delete")
+    public void delete(@RequestBody Notification notification) {
         notificationService.delete(notification);
     }
 

@@ -16,5 +16,5 @@ public interface NotificationDao {
     Notification getById(int notificationId);
     void add(Notification notification);
     void update(Notification notification);
-    void delete(int notification);
+    void delete(Notification notification);
 }

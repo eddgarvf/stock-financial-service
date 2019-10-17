@@ -90,7 +90,7 @@ public class NotificationDaoImpl implements NotificationDao {
     }
 
     @Override
-    public void delete(int notification) {
+    public void delete(Notification notification) {
         entityManager.remove(notification);
     }
 }
