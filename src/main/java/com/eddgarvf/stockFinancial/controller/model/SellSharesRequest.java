@@ -1,13 +1,12 @@
 package com.eddgarvf.stockFinancial.controller.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SellSharesRequest {
 
-    int userId;
-    int stockId;
-    List<Integer> shareIds = new ArrayList<>();
+    private int userId;
+    private int stockId;
+    private List<Integer> shareIds;
 
     public SellSharesRequest(int userId, int stockId, List<Integer> shareIds) {
         this.userId = userId;

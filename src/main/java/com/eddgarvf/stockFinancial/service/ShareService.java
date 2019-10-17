@@ -17,12 +17,12 @@ public class ShareService {
 
     private static final Logger logger = LoggerFactory.getLogger(ShareService.class);
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     private final StockDailyDao stockDailyDao;
     private final ShareDao shareDao;
     private final ShareQtyDao shareQtyDao;
-
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Autowired
     public ShareService(StockDailyDao stockDailyDao,

@@ -19,11 +19,11 @@ public class StockDailyService {
 
     private static final Logger logger = LoggerFactory.getLogger(StockDailyService.class);
 
-    private final StockDailyDao stockDailyDao;
-    private final StockDao stockDao;
-
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    private final StockDailyDao stockDailyDao;
+    private final StockDao stockDao;
 
     @Autowired
     public StockDailyService(StockDailyDao stockDailyDao,
