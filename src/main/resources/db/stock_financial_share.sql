@@ -1,0 +1,63 @@
+CREATE DATABASE  IF NOT EXISTS `stock_financial` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `stock_financial`;
+-- MySQL dump 10.13  Distrib 8.0.17, for macos10.14 (x86_64)
+--
+-- Host: 127.0.0.1    Database: stock_financial
+-- ------------------------------------------------------
+-- Server version	8.0.17
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `share`
+--
+
+DROP TABLE IF EXISTS `share`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `share` (
+  `id_stock` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `buy_price` double NOT NULL,
+  `buy_sell` tinyint(1) NOT NULL,
+  `buy_datetime` datetime NOT NULL,
+  `sell_price` double DEFAULT NULL,
+  `sell_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK9086kcu8aij3lqcnnw6wax4av` (`id_stock`),
+  KEY `FKrui8o551ecm63ccqw686r6u6g` (`id_user`),
+  CONSTRAINT `FK9086kcu8aij3lqcnnw6wax4av` FOREIGN KEY (`id_stock`) REFERENCES `stock` (`id`),
+  CONSTRAINT `FKrui8o551ecm63ccqw686r6u6g` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `share`
+--
+
+LOCK TABLES `share` WRITE;
+/*!40000 ALTER TABLE `share` DISABLE KEYS */;
+INSERT INTO `share` VALUES (3,3,15,155,1,'2019-10-16 10:55:02',NULL,NULL),(3,3,16,155,0,'2019-10-16 10:55:03',100,'2019-10-16 15:07:50'),(3,3,17,155,1,'2019-10-16 10:55:03',NULL,NULL),(3,3,18,155,0,'2019-10-16 10:55:04',100,'2019-10-16 15:09:04'),(3,3,19,100,1,'2019-10-16 10:55:46',NULL,NULL),(3,3,20,100,0,'2019-10-16 10:55:46',80,'2019-10-16 18:31:48'),(3,3,21,100,0,'2019-10-16 10:55:46',80,'2019-10-16 18:31:48'),(3,3,22,100,1,'2019-10-16 10:55:46',NULL,NULL),(3,3,23,100,1,'2019-10-16 10:55:46',NULL,NULL),(3,3,24,100,1,'2019-10-16 10:55:46',NULL,NULL);
+/*!40000 ALTER TABLE `share` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-10-17  0:05:58
