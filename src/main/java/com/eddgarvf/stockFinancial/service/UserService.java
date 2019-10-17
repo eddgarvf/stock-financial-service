@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,11 +23,21 @@ public class UserService {
     }
 
     public List<User> getAll() {
-        return userDao.getAll();
+        try{
+            return userDao.getAll();
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public User getById(int userId) {
-        return userDao.getById(userId);
+        try{
+            return userDao.getById(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public void add(User user) {

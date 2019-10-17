@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,11 +23,21 @@ public class StockService {
     }
 
     public List<Stock> getAll() {
-        return stockDao.getAll();
+        try{
+            return stockDao.getAll();
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public Stock getById(int stockId) {
-        return stockDao.getById(stockId);
+        try{
+            return stockDao.getById(stockId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public void add(Stock stock) {

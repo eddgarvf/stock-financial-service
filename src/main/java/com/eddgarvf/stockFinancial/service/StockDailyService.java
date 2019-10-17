@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,15 +34,30 @@ public class StockDailyService {
     }
 
     public StockDaily get(int stockDailyId){
-        return stockDailyDao.get(stockDailyId);
+        try{
+            return stockDailyDao.get(stockDailyId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public StockDaily getLastStockDailyRecord(int stockId){
-        return stockDailyDao.getLastStockDailyRecord(stockId);
+        try{
+            return stockDailyDao.getLastStockDailyRecord(stockId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public List<StockDaily> getListByDates(int stockId, Date startDate, Date endDate) {
-        return stockDailyDao.getListByDates(stockId, startDate, getDateWithMidNight(endDate));
+        try{
+            return stockDailyDao.getListByDates(stockId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
 

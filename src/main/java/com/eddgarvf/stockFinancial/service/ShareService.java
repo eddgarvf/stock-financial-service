@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,31 +35,66 @@ public class ShareService {
     }
 
     public List<Share> getAllByUser(int userId) {
-        return shareDao.getAllByUser(userId);
+        try{
+            return shareDao.getAllByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllBoughtByUser(int userId) {
-        return shareDao.getAllBoughtByUser(userId);
+        try{
+            return shareDao.getAllBoughtByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllBoughtByUserStock(int userId, int stockId) {
-        return shareDao.getAllBoughtByUserStock(userId, stockId);
+        try{
+            return shareDao.getAllBoughtByUserStock(userId, stockId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllBoughtByUserStockDates(int userId, int stockId, Date startDate, Date endDate) {
-        return shareDao.getAllBoughtByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+        try{
+            return shareDao.getAllBoughtByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllSoldByUser(int userId) {
-        return shareDao.getAllSoldByUser(userId);
+        try{
+            return shareDao.getAllSoldByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllSoldByUserStock(int userId, int stockId) {
-        return shareDao.getAllSoldByUserStock(userId, stockId);
+        try{
+            return shareDao.getAllSoldByUserStock(userId, stockId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Share> getAllSoldByUserStockDates(int userId, int stockId, Date startDate, Date endDate) {
-        return shareDao.getAllSoldByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+        try{
+            return shareDao.getAllSoldByUserStockDates(userId, stockId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public void add(Share share) {

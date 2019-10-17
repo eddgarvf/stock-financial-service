@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,31 +38,66 @@ public class NotificationService {
     }
 
     public List<Notification> getAllByUser(int userId) {
-        return notificationDao.getAllByUser(userId);
+        try{
+            return notificationDao.getAllByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Notification> getAllByUserDate(int userId, Date startDate, Date endDate) {
-        return notificationDao.getAllByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        try{
+            return notificationDao.getAllByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Notification> getAllSeenByUser(int userId) {
-        return notificationDao.getAllSeenByUser(userId);
+        try{
+            return notificationDao.getAllSeenByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Notification> getAllSeenByUserDate(int userId, Date startDate, Date endDate) {
-        return notificationDao.getAllSeenByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        try{
+            return notificationDao.getAllSeenByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Notification> getAllNotSeenByUser(int userId) {
-        return notificationDao.getAllNotSeenByUser(userId);
+        try{
+            return notificationDao.getAllNotSeenByUser(userId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public List<Notification> getAllNotSeenByUserDate(int userId, Date startDate, Date endDate) {
-        return notificationDao.getAllNotSeenByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        try{
+            return notificationDao.getAllNotSeenByUserDate(userId, startDate, getDateWithMidNight(endDate));
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public Notification getById(int notificationId) {
-        return notificationDao.getById(notificationId);
+        try{
+            return notificationDao.getById(notificationId);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public void addPriceNotification(double price, int userId, int stockId, Date startDate, Date endDate) {
